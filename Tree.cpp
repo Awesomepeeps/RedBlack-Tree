@@ -16,20 +16,12 @@ struct treeNode {
 class binaryTree { // idea of implementation came from geekforgeek
 private:
 
-    int findChild (treeNode* node) { // 1 is left-child; 2 is right-child
-        if (node->data == node->parent->left->data) {
-            return 1;
-        }
-        else {
-            return 2;
-        }
-    }
+    treeNode* root;
 
     void leftRotation(treeNode* node) {
         treeNode* parent = node->parent;
         treeNode* grandparent = parent->parent;
-        int child = findChild(parent);
-        if (child == 1) {
+        if (node->parent->parent->left == node->parent) {
             grandparent->left = node;
             parent->right = node->left;
             node->left = parent;
@@ -44,8 +36,7 @@ private:
     void rightRotation(treeNode* node) {
         treeNode* parent = node->parent;
         treeNode* grandparent = parent->parent;
-        int child = findChild(parent);
-        if (child == 1) {
+        if (node->parent->parent->left == node->parent) {
             grandparent->left = node;
             parent->left = node->right;
             node->right = parent;
@@ -56,8 +47,6 @@ private:
             node->right = parent;
         }
     }
-
-    treeNode* root;
 
     void rbinsert (treeNode* node) {
         
